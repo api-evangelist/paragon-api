@@ -1,0 +1,117 @@
+aid: paragon-api
+name: Paragon
+review:
+  question: Does Paragon expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-12'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Paragon's own developer-facing surface -
+    the Connect/SDK API, the Workflows API, the ActionKit tool-calling API, and
+    the Proxy API - is request/response REST over HTTPS. Paragon's real-time
+    behavior is delivered by webhooks/App Events and by Managed Sync writing
+    data into the SaaS builder's own systems, not by a server-push transport
+    (WebSocket or SSE) on Paragon's own API. There is no wss:// endpoint to
+    model, so no AsyncAPI was created.
+findings:
+  summary: |
+    Paragon does not publish a documented public WebSocket API. Paragon is an
+    embedded iPaaS: SaaS companies configure integrations, Managed Sync,
+    Workflows, and ActionKit tools, then embed a Connect Portal so each of their
+    end customers (Connected Users) can authorize their own third-party
+    accounts. All documented API surfaces are REST over HTTPS and are
+    authenticated with a Paragon User Token - an RS256-signed JWT - presented as
+    a Bearer token. The Connect/SDK API and Workflows API live on
+    https://api.useparagon.com under /projects/{projectId}/sdk; ActionKit is on
+    https://actionkit.useparagon.com/projects/{projectId}/tools; the Proxy API is
+    on https://proxy.useparagon.com/projects/{projectId}/sdk/proxy. Event
+    delivery to the SaaS builder is via webhooks / App Events (server-to-endpoint
+    HTTP), not a WebSocket. No realtime, bidirectional, or streaming WebSocket
+    (ws:// or wss://) endpoint is documented on Paragon's own API.
+  accessModel: |
+    Paragon is a B2B, contact-sales product. Builders create a Project, generate
+    a Signing Key under Settings > SDK Setup, and sign a per-Connected-User JWT
+    (RS256) on their own server. Requests are always made on behalf of a
+    Connected User. There is a build-for-free developer tier and a 14-day trial;
+    production plans (Pro, Enterprise) are quote-based and pricing is not
+    published. The API cannot be exercised anonymously - it requires a live
+    Project, Signing Key, and an authorized Connected User.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://api.useparagon.com
+      documented: true
+      note: Connect/SDK API and Workflows API under /projects/{projectId}/sdk.
+    - protocol: REST
+      scheme: https
+      baseURL: https://actionkit.useparagon.com
+      documented: true
+      note: ActionKit tool-calling API under /projects/{projectId}/tools.
+    - protocol: REST
+      scheme: https
+      baseURL: https://proxy.useparagon.com
+      documented: true
+      note: Proxy (passthrough) API forwarding to third-party providers on behalf of Connected Users.
+    - protocol: Webhook
+      scheme: https
+      documented: true
+      note: App Events and Workflow webhooks POST to configured HTTP endpoints. Server-to-endpoint HTTP, not WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Paragon's Connect, Workflows, ActionKit, or Proxy API references as of the review date.
+  endpointsConfirmedRest:
+    - GET    https://api.useparagon.com/projects/{projectId}/sdk/metadata
+    - GET    https://api.useparagon.com/projects/{projectId}/sdk/integrations
+    - GET    https://api.useparagon.com/projects/{projectId}/sdk/integrations/{integrationType}
+    - GET    https://api.useparagon.com/projects/{projectId}/sdk/me
+    - PATCH  https://api.useparagon.com/projects/{projectId}/sdk/me
+    - POST   https://api.useparagon.com/projects/{projectId}/sdk/actions
+    - GET    https://api.useparagon.com/projects/{projectId}/sdk/credentials
+    - PATCH  https://api.useparagon.com/projects/{projectId}/sdk/credentials/{credentialId}
+    - DELETE https://api.useparagon.com/projects/{projectId}/sdk/integrations/{integrationId}
+    - POST   https://api.useparagon.com/projects/{projectId}/sdk/workflows/{workflowId}
+    - DELETE https://api.useparagon.com/projects/{projectId}/sdk/workflows/{workflowId}
+    - POST   https://api.useparagon.com/projects/{projectId}/sdk/triggers/{workflowId}
+    - POST   https://api.useparagon.com/projects/{projectId}/sdk/events/trigger
+    - GET    https://actionkit.useparagon.com/projects/{projectId}/tools
+    - POST   https://actionkit.useparagon.com/projects/{projectId}/tools
+    - ANY    https://proxy.useparagon.com/projects/{projectId}/sdk/proxy/{integrationType}/{apiPath}
+    - ANY    https://proxy.useparagon.com/projects/{projectId}/sdk/proxy/custom/{integrationId}/{apiPath}
+  endpointsModeled:
+    - note: >-
+        The ActionKit GET /tools query parameters (format, limit_to_available,
+        reload_fields, integrations, categories) and the response envelope
+        ({tools, errors}) are documented; individual per-integration tool
+        schemas are dynamic (returned as JSON Schema per Connected User) and are
+        therefore not enumerated in the OpenAPI. Request/response bodies for the
+        SDK endpoints are modeled as generic JSON objects because Paragon does
+        not publish a formal OpenAPI schema for the SDK API.
+sources:
+  - url: https://docs.useparagon.com/apis/api-reference
+    type: APIReference
+    note: Connect/SDK and Workflows REST endpoints under /projects/{projectId}/sdk; Bearer Paragon User Token. All REST.
+  - url: https://docs.useparagon.com/api/making-api-requests
+    type: Documentation
+    note: Proxy (Connect) API base proxy.useparagon.com; any HTTP verb; Bearer Paragon User Token. No WebSocket.
+  - url: https://docs.useparagon.com/actionkit/api-reference
+    type: APIReference
+    note: ActionKit base actionkit.useparagon.com; GET/POST /projects/{projectId}/tools; JWT auth.
+  - url: https://docs.useparagon.com/actionkit/api-reference/list-tools
+    type: APIReference
+    note: GET /tools query params and {tools, errors} response envelope.
+  - url: https://docs.useparagon.com/actionkit/api-reference/run-tool
+    type: APIReference
+    note: POST /tools with {tool, parameters}.
+  - url: https://docs.useparagon.com/getting-started/installing-the-connect-sdk
+    type: Documentation
+    note: Paragon User Token is an RS256 JWT; Signing Key from Settings > SDK Setup; claims sub/aud/iat/exp. No WebSocket.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket protocol surface exists. Paragon's own public API is
+    request/response REST (Connect/SDK, Workflows, ActionKit, Proxy) with
+    webhook/App Event delivery. No AsyncAPI document was created because there is
+    no server-push transport (WebSocket or SSE) on Paragon's own API to model.

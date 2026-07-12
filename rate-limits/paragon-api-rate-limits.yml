@@ -1,0 +1,58 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Paragon
+providerId: paragon-api
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Embedded iPaaS
+- Integrations
+- Rate Limiting
+- Quotas
+description: >-
+  Paragon does not publish fixed numeric rate limits for its Connect/SDK,
+  Workflows, ActionKit, or Proxy APIs. In practice, effective throughput is
+  governed by two things: the Connected-User-based capacity of your plan, and the
+  rate limits of the underlying third-party providers that the Proxy API and
+  ActionKit call on your behalf (for example, Salesforce, HubSpot, or Slack API
+  limits). Because Paragon requests are made per Connected User with short-lived
+  JWTs, quotas are effectively scoped to your project and its Connected Users
+  rather than to a single global API key.
+notes: >-
+  No per-minute or per-endpoint numeric limits for Paragon's own APIs are
+  documented as of the review date. Design clients to honor 429 responses with
+  exponential backoff and to respect the downstream provider's published limits,
+  since the Proxy API surfaces those provider responses directly. Verify any
+  contractual throughput terms with Paragon.
+sources:
+- https://docs.useparagon.com/apis/api-reference
+- https://docs.useparagon.com/api/making-api-requests
+- https://docs.useparagon.com/actionkit/api-reference
+responseCodes:
+  throttled: 429
+limits:
+- name: Paragon API Requests
+  scope: project
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for Paragon's own Connect, Workflows, ActionKit, or Proxy APIs.
+- name: Connected User Capacity
+  scope: project
+  metric: connected_users
+  limit: per plan
+  notes: Plan capacity scales on the number of Connected Users rather than a request-per-minute cap.
+- name: Downstream Provider Limits
+  scope: integration
+  metric: requests
+  limit: provider-defined
+  notes: Proxy API and ActionKit calls are subject to the rate limits of the third-party provider being called, which Paragon passes through.
+policies:
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on 429 responses from Paragon or from the underlying provider surfaced via the Proxy API.
+- name: Per-User Scoping
+  description: Requests are authenticated per Connected User with short-lived RS256 JWTs, so throttling is effectively scoped to the project and its Connected Users.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

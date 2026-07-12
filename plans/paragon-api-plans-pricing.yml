@@ -1,0 +1,119 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Paragon
+providerId: paragon-api
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Embedded iPaaS
+- Integrations
+- Workflow Automation
+- SaaS Integrations
+- Plans
+description: >-
+  Paragon is a B2B, contact-sales product and does not publish per-unit pricing.
+  There is a build-for-free developer tier for evaluation and a 14-day trial;
+  production is sold as two quote-based plans, Pro and Enterprise. Billing
+  combines an annual platform subscription with usage that scales primarily on the
+  number of Connected Users (the SaaS builder's end customers who have connected
+  an integration); the number of available integrations is unlimited on all plans.
+  Enterprise adds security and operational capabilities such as SSO/SAML,
+  role-based access control, dynamic field mapping, longer task-log retention, and
+  self-hosting. Exact rates are not reconciled here - contact Paragon sales.
+notes: >-
+  Plan names and the Connected-User billing basis are confirmed from Paragon's
+  pricing page and third-party pricing write-ups; dollar amounts are not published.
+  Verify current tiers and entitlements with Paragon during reconciliation.
+sources:
+- https://www.useparagon.com/pricing
+- https://docs.useparagon.com
+- https://www.useparagon.com/
+plans:
+- id: paragon-developer
+  name: Developer (Build for Free)
+  type: free
+  description: >-
+    Free tier for building and evaluating integrations before going to
+    production, plus a 14-day trial of paid capabilities. No free production
+    plan is offered.
+  entries:
+  - label: Connected Users
+    name: dev_connected_users
+    type: usage
+    metric: connected_users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: free for building/evaluation
+    userMultiplied: false
+  elements:
+  - name: Unlimited Integrations
+  - name: Connect Portal
+  - name: Managed Sync
+  - name: Workflows
+  - name: ActionKit
+- id: paragon-pro
+  name: Pro
+  type: subscription
+  description: >-
+    Production plan with annual platform subscription plus usage scaling on
+    Connected Users. Quote-based; pricing is not published.
+  entries:
+  - label: Platform Subscription
+    name: pro_subscription
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: get a quote (contact sales)
+    userMultiplied: false
+  - label: Connected Users
+    name: pro_connected_users
+    type: usage
+    metric: connected_users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: usage-based on connected users (contact sales)
+    userMultiplied: true
+  elements:
+  - name: Unlimited Integrations
+  - name: Managed Sync
+  - name: Workflows
+  - name: ActionKit
+  - name: Proxy API
+- id: paragon-enterprise
+  name: Enterprise
+  type: enterprise
+  description: >-
+    Enterprise plan adding SSO/SAML, role-based access control, dynamic field
+    mapping, extended task-log retention with API access to past tasks,
+    self-hosting (on-premise), priority support with SLAs, and professional
+    services. Quote-based.
+  entries:
+  - label: Enterprise Agreement
+    name: enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: get a quote (contact sales)
+    userMultiplied: false
+  elements:
+  - name: SSO / SAML
+  - name: Role-Based Access Control
+  - name: Dynamic Field Mapping
+  - name: Self-Hosting (On-Premise)
+  - name: Extended Task-Log Retention
+  - name: SLAs and Priority Support
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

@@ -1,0 +1,153 @@
+aid: paragon-api
+url: https://raw.githubusercontent.com/api-evangelist/paragon-api/refs/heads/main/apis.yml
+name: Paragon
+kind: company
+description: Paragon is an embedded iPaaS that lets SaaS companies build native,
+  in-app integrations for their customers. Developers configure integrations, Managed
+  Sync pipelines, Workflows, and ActionKit tools in Paragon, then embed them behind
+  a Connect Portal so each of their end customers (Connected Users) can authenticate
+  their own third-party accounts. Requests are made on behalf of Connected Users
+  using a Paragon User Token - an RS256-signed JWT - across a REST Connect/SDK API
+  (api.useparagon.com), a Workflows API, an ActionKit tool-calling API for AI agents
+  (actionkit.useparagon.com), and a Proxy API (proxy.useparagon.com) that forwards
+  requests to third-party providers. Paragon is a B2B, contact-sales product.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Embedded iPaaS
+- Integrations
+- Embedded Integrations
+- Native Integrations
+- Workflow Automation
+- Integration Platform
+- API Integration
+- SaaS Integrations
+- Connectors
+created: '2026-07-12'
+modified: '2026-07-12'
+specificationVersion: '0.19'
+apis:
+- aid: paragon-api:paragon-connect-api
+  name: Paragon Connect API
+  tags:
+  - Connect
+  - Integrations
+  - Connected Users
+  - Managed Sync
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.useparagon.com/apis/api-reference
+  baseURL: https://api.useparagon.com
+  properties:
+  - url: https://docs.useparagon.com/apis/api-reference
+    type: Documentation
+  - url: https://docs.useparagon.com/apis/api-reference
+    type: APIReference
+  - url: openapi/paragon-api-openapi.yml
+    type: OpenAPI
+  - url: collections/paragon-api.postman_collection.json
+    type: PostmanCollection
+  - url: collections/paragon-api.opencollection.json
+    type: OpenCollection
+  description: REST SDK API for the embedded integration experience. Retrieve project
+    and integration metadata, read the authenticated Connected User and their
+    connected credentials, load dynamic action options, and disconnect integrations -
+    all scoped under /projects/{projectId}/sdk and authenticated with a Paragon User
+    Token. Backs the Connect Portal and Managed Sync onboarding for each Connected
+    User.
+- aid: paragon-api:paragon-workflows-api
+  name: Paragon Workflows API
+  tags:
+  - Workflows
+  - Triggers
+  - Events
+  - Automation
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.useparagon.com/apis/api-reference
+  baseURL: https://api.useparagon.com
+  properties:
+  - url: https://docs.useparagon.com/apis/api-reference
+    type: Documentation
+  - url: https://docs.useparagon.com/apis/api-reference
+    type: APIReference
+  - url: openapi/paragon-api-openapi.yml
+    type: OpenAPI
+  - url: collections/paragon-api.postman_collection.json
+    type: PostmanCollection
+  - url: collections/paragon-api.opencollection.json
+    type: OpenCollection
+  description: Programmatically enable or disable Paragon Workflows for a Connected
+    User, trigger request-type Workflows, and send App Events that fire Workflows.
+    Endpoints live under /projects/{projectId}/sdk/workflows, /sdk/triggers, and
+    /sdk/events/trigger and are authenticated with a Paragon User Token.
+- aid: paragon-api:paragon-actionkit-api
+  name: Paragon ActionKit API
+  tags:
+  - ActionKit
+  - Tool Calling
+  - AI Agents
+  - Actions
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.useparagon.com/actionkit/api-reference
+  baseURL: https://actionkit.useparagon.com
+  properties:
+  - url: https://docs.useparagon.com/actionkit/actionkit-for-tool-calling
+    type: Documentation
+  - url: https://docs.useparagon.com/actionkit/api-reference
+    type: APIReference
+  - url: openapi/paragon-api-openapi.yml
+    type: OpenAPI
+  - url: collections/paragon-api.postman_collection.json
+    type: PostmanCollection
+  - url: collections/paragon-api.opencollection.json
+    type: OpenCollection
+  description: Tool-calling API for AI agents. List the third-party actions (tools)
+    available to a Connected User as JSON Schema, then run a tool by name with
+    parameters. Endpoints are GET and POST /projects/{projectId}/tools (with a
+    backward-compatible /actions alias) on actionkit.useparagon.com, authenticated
+    with a Paragon User Token.
+- aid: paragon-api:paragon-proxy-api
+  name: Paragon Proxy API
+  tags:
+  - Proxy
+  - Passthrough
+  - Third Party APIs
+  - Connected Users
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://docs.useparagon.com/api/making-api-requests
+  baseURL: https://proxy.useparagon.com
+  properties:
+  - url: https://docs.useparagon.com/api/making-api-requests
+    type: Documentation
+  - url: https://docs.useparagon.com/api/making-api-requests
+    type: APIReference
+  - url: openapi/paragon-api-openapi.yml
+    type: OpenAPI
+  - url: collections/paragon-api.postman_collection.json
+    type: PostmanCollection
+  - url: collections/paragon-api.opencollection.json
+    type: OpenCollection
+  description: Passthrough (formerly Connect) API that forwards any HTTP request to a
+    third-party integration provider on behalf of a Connected User, reusing the
+    credentials they authorized in the Connect Portal. Paths are
+    /projects/{projectId}/sdk/proxy/{integrationType}/{apiPath} (or /custom/{integrationId}/...
+    for custom integrations); any HTTP verb is accepted and the token carries the
+    Connected User identity.
+common:
+- type: DomainSecurity
+  url: security/paragon-api-domain-security.yml
+- type: Authentication
+  url: authentication/paragon-api-authentication.yml
+- type: Website
+  url: https://www.useparagon.com
+- type: Documentation
+  url: https://docs.useparagon.com
+- type: Plans
+  url: plans/paragon-api-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/paragon-api-rate-limits.yml
+- type: FinOps
+  url: finops/paragon-api-finops.yml
+- type: LinkedIn
+  url: https://www.linkedin.com/company/useparagon
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

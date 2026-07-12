@@ -1,0 +1,33 @@
+generated: '2026-07-12'
+method: researched
+source: https://docs.useparagon.com/getting-started/installing-the-connect-sdk
+summary:
+  types:
+  - http
+schemes:
+- name: paragonUserToken
+  type: http
+  scheme: bearer
+  bearerFormat: JWT
+  description: >-
+    Paragon User Token - an RS256-signed JWT that identifies a Connected User -
+    passed as `Authorization: Bearer <token>`. The SaaS builder's server signs the
+    token with a private Signing Key generated in the Paragon dashboard under
+    Settings > SDK Setup; Paragon verifies the signature with the matching public
+    key. Minimum claims are `sub` (the Connected User's or their company's ID),
+    `aud` (audience, formatted as `useparagon.com/{projectId}`), `iat` (issued-at),
+    and `exp` (expiry, typically one hour). Optional JWT Permissions scope claims
+    (e.g. `actionkit`) restrict which APIs a token may call. The same Bearer token
+    authenticates the Connect/SDK API (api.useparagon.com), the Workflows API, the
+    ActionKit API (actionkit.useparagon.com), and the Proxy API
+    (proxy.useparagon.com).
+  sources:
+  - https://docs.useparagon.com/getting-started/installing-the-connect-sdk
+  - https://docs.useparagon.com/apis/api-reference
+  - https://docs.useparagon.com/apis/api-reference/jwt-permissions
+notes: >-
+  Paragon does not issue a static, project-wide API key for calling these APIs;
+  every call is scoped to a Connected User via a short-lived signed JWT. The
+  Signing Key (an RSA key pair) is the long-lived secret and must be kept on the
+  builder's server. This is a B2B, contact-sales product - obtaining a Project ID
+  and Signing Key requires a Paragon account.

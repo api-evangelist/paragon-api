@@ -1,0 +1,51 @@
+generated: '2026-07-12'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.useparagon.com
+  https: true
+  tls_issuer: ZeroSSL ECC DV SSL CA 2
+  cert_expires: Sep  8 23:59:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  server: Framer
+- host: api.useparagon.com
+  https: true
+  tls_issuer: Google Trust Services (WE1)
+  cert_expires: Oct  8 05:33:24 2026 GMT
+  hsts: true
+  hsts_max_age: 2592000
+  hsts_include_subdomains: true
+  server: cloudflare
+- host: proxy.useparagon.com
+  https: true
+  tls_issuer: Google Trust Services (WE1)
+  cert_expires: Oct  8 05:33:24 2026 GMT
+  hsts: true
+  hsts_max_age: 2592000
+  hsts_include_subdomains: true
+  server: cloudflare
+- host: actionkit.useparagon.com
+  https: true
+  tls_issuer: Google Trust Services (WE1)
+  cert_expires: Oct  8 05:33:24 2026 GMT
+  hsts: true
+  hsts_max_age: 2592000
+  hsts_include_subdomains: true
+  server: cloudflare
+- host: zeus.useparagon.com
+  https: true
+  tls_issuer: Google Trust Services (WE1)
+  cert_expires: Oct  8 05:33:24 2026 GMT
+  hsts: true
+  hsts_max_age: 2592000
+  hsts_include_subdomains: true
+  server: cloudflare
+domains:
+- domain: useparagon.com
+  dnssec: false
+  caa: []
+  spf: true
+  spf_record: v=spf1 include:_spf.google.com include:sendgrid.net include:stspg-customer.com -all
+  dmarc: true
+  dmarc_policy: quarantine

@@ -1,0 +1,86 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Paragon
+providerId: paragon-api
+created: '2026-07-12'
+modified: '2026-07-12'
+reconciled: false
+tags:
+- Embedded iPaaS
+- Integrations
+- Workflow Automation
+- SaaS Integrations
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Paragon spend. Paragon is a B2B, contact-sales embedded iPaaS
+  with no published per-unit pricing. Cost is an annual platform subscription
+  (Pro or Enterprise tier) plus usage that scales primarily on the number of
+  Connected Users - the SaaS builder's end customers who have connected an
+  integration. Integrations themselves are unlimited across plans, so the dominant
+  cost driver is how many of your customers actively use integrations, not how
+  many integrations you offer. A build-for-free developer tier and a 14-day trial
+  exist for evaluation. Self-hosting (on-premise) on Enterprise shifts some
+  infrastructure cost to the customer.
+notes: >-
+  Per-unit rates are not reconciled here - Paragon does not publish pricing.
+  Verify the platform subscription, the Connected-User pricing basis, and any
+  overage terms directly with Paragon sales. Note that downstream third-party API
+  usage driven through the Proxy API or ActionKit may carry its own costs at those
+  providers, separate from Paragon's invoice.
+sources:
+- https://www.useparagon.com/pricing
+- https://www.useparagon.com/
+- https://docs.useparagon.com
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Paragon
+serviceCategory: Integration Platform
+billingModel:
+  pricingCategory: Subscription-Plus-Usage
+  billingFrequency: Annual
+  billingCurrency: USD
+  chargeCategories:
+  - Purchase
+  - Usage
+focusColumns:
+  ServiceName: Paragon
+  ServiceCategory: Integration Platform
+  ProviderName: Paragon
+  PublisherName: Paragon
+  InvoiceIssuerName: Paragon
+  BillingCurrency: USD
+  ChargeCategory: Purchase
+  PricingCategory: Subscription-Plus-Usage
+meters:
+- name: platform_subscription
+  description: Annual platform subscription for the Pro or Enterprise plan.
+  unit: contract
+  aggregation: max
+  dimensions:
+  - plan
+- name: connected_users
+  description: Connected Users (end customers with at least one connected integration) that usage scales on.
+  unit: users
+  aggregation: max
+  dimensions:
+  - project
+  - environment
+principles:
+- name: Visibility
+  description: Track the count of active Connected Users per project/environment, since that is the primary billing driver; watch for growth in connected customers.
+- name: Allocation
+  description: Map Connected Users to internal customer segments or plans so integration cost can be attributed to the revenue it supports.
+- name: Optimization
+  description: Deactivate Connected Users who no longer use integrations; consolidate environments; weigh self-hosting (Enterprise) against managed cost at high volume.
+- name: Accountability
+  description: Assign an owner for the Paragon contract; review Connected-User counts against the subscribed tier and reconcile against Paragon invoices; account separately for downstream provider API costs.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

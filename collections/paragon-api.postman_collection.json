@@ -1,0 +1,367 @@
+{
+  "info": {
+    "name": "Paragon API",
+    "description": "Paragon embedded iPaaS REST APIs: Connect/SDK, Workflows, ActionKit, and Proxy. All requests are authenticated with a Paragon User Token (an RS256-signed JWT) passed as a Bearer token, on behalf of a Connected User.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{paragonUserToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "apiBaseUrl",
+      "value": "https://api.useparagon.com"
+    },
+    {
+      "key": "actionkitBaseUrl",
+      "value": "https://actionkit.useparagon.com"
+    },
+    {
+      "key": "proxyBaseUrl",
+      "value": "https://proxy.useparagon.com"
+    },
+    {
+      "key": "projectId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Connect",
+      "item": [
+        {
+          "name": "Get integration metadata",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/metadata",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "metadata"]
+            },
+            "description": "Returns metadata (name, brand color, icon) for the project's integrations."
+          }
+        },
+        {
+          "name": "List enabled integrations",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/integrations",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "integrations"]
+            },
+            "description": "Lists the project's enabled integrations and their configuration."
+          }
+        },
+        {
+          "name": "Get the authenticated Connected User",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/me",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "me"]
+            },
+            "description": "Returns the authenticated Connected User and their integration state."
+          }
+        },
+        {
+          "name": "Update Connected User metadata",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/me",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "me"]
+            },
+            "description": "Updates metadata on the authenticated Connected User."
+          }
+        },
+        {
+          "name": "Load dynamic action options",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/actions",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "actions"]
+            },
+            "description": "Loads options from a dynamic data source for an integration field."
+          }
+        },
+        {
+          "name": "List connected credentials",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/credentials",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "credentials"]
+            },
+            "description": "Returns the Connected User's connected credentials."
+          }
+        },
+        {
+          "name": "Disconnect an integration",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/integrations/:integrationId",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "integrations", ":integrationId"],
+              "variable": [
+                {
+                  "key": "integrationId",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Disconnects an integration for the authenticated Connected User."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Workflows",
+      "item": [
+        {
+          "name": "Enable a Workflow",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/workflows/:workflowId",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "workflows", ":workflowId"],
+              "variable": [
+                {
+                  "key": "workflowId",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Enables a Workflow for the authenticated Connected User."
+          }
+        },
+        {
+          "name": "Disable a Workflow",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/workflows/:workflowId",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "workflows", ":workflowId"],
+              "variable": [
+                {
+                  "key": "workflowId",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Disables a Workflow for the authenticated Connected User."
+          }
+        },
+        {
+          "name": "Trigger a request-type Workflow",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/triggers/:workflowId",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "triggers", ":workflowId"],
+              "variable": [
+                {
+                  "key": "workflowId",
+                  "value": ""
+                }
+              ]
+            },
+            "description": "Triggers a request-type Workflow and returns its response."
+          }
+        },
+        {
+          "name": "Send an App Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{apiBaseUrl}}/projects/{{projectId}}/sdk/events/trigger",
+              "host": ["{{apiBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "events", "trigger"]
+            },
+            "description": "Sends an App Event that can trigger event-based Workflows."
+          }
+        }
+      ]
+    },
+    {
+      "name": "ActionKit",
+      "item": [
+        {
+          "name": "List tools (actions)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{actionkitBaseUrl}}/projects/{{projectId}}/tools?format=json_schema&limit_to_available=true",
+              "host": ["{{actionkitBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "tools"],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "json_schema"
+                },
+                {
+                  "key": "limit_to_available",
+                  "value": "true"
+                }
+              ]
+            },
+            "description": "Lists the third-party tools available to the Connected User as JSON Schema."
+          }
+        },
+        {
+          "name": "Run a tool (action)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tool\": \"SLACK_SEND_MESSAGE\",\n  \"parameters\": {}\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{actionkitBaseUrl}}/projects/{{projectId}}/tools",
+              "host": ["{{actionkitBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "tools"]
+            },
+            "description": "Runs a tool by name with parameters on behalf of the Connected User."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Proxy",
+      "item": [
+        {
+          "name": "Proxy a request to a provider",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"channel\": \"C000000000\",\n  \"text\": \"Message via Paragon\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{proxyBaseUrl}}/projects/{{projectId}}/sdk/proxy/:integrationType/:apiPath",
+              "host": ["{{proxyBaseUrl}}"],
+              "path": ["projects", "{{projectId}}", "sdk", "proxy", ":integrationType", ":apiPath"],
+              "variable": [
+                {
+                  "key": "integrationType",
+                  "value": "slack"
+                },
+                {
+                  "key": "apiPath",
+                  "value": "chat.postMessage"
+                }
+              ]
+            },
+            "description": "Forwards a request to the third-party provider on behalf of the Connected User. Any HTTP verb is accepted."
+          }
+        }
+      ]
+    }
+  ]
+}

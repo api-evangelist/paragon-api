@@ -1,0 +1,365 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paragon API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{paragonUserToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connect",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get integration metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/metadata",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID."
+              }
+            ]
+          },
+          "docs": "Returns metadata (name, brand color, icon) for the project's integrations."
+        },
+        {
+          "info": {
+            "name": "List enabled integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/integrations",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Lists the project's enabled integrations and their configuration."
+        },
+        {
+          "info": {
+            "name": "Get the authenticated Connected User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/me",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the authenticated Connected User and their integration state."
+        },
+        {
+          "info": {
+            "name": "Update Connected User metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/me",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates metadata on the authenticated Connected User."
+        },
+        {
+          "info": {
+            "name": "Load dynamic action options",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/actions",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Loads options from a dynamic data source for an integration field."
+        },
+        {
+          "info": {
+            "name": "List connected credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/credentials",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Returns the Connected User's connected credentials."
+        },
+        {
+          "info": {
+            "name": "Disconnect an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/integrations/:integrationId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disconnects an integration for the authenticated Connected User."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Enable a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/workflows/:workflowId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workflowId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Enables a Workflow for the authenticated Connected User."
+        },
+        {
+          "info": {
+            "name": "Disable a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/workflows/:workflowId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workflowId",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "Disables a Workflow for the authenticated Connected User."
+        },
+        {
+          "info": {
+            "name": "Trigger a request-type Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/triggers/:workflowId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "workflowId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a request-type Workflow and returns its response."
+        },
+        {
+          "info": {
+            "name": "Send an App Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/events/trigger",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends an App Event that can trigger event-based Workflows."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "ActionKit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tools (actions)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://actionkit.useparagon.com/projects/:projectId/tools",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "format",
+                "value": "json_schema",
+                "type": "query"
+              },
+              {
+                "name": "limit_to_available",
+                "value": "true",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Lists the third-party tools available to the Connected User as JSON Schema."
+        },
+        {
+          "info": {
+            "name": "Run a tool (action)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://actionkit.useparagon.com/projects/:projectId/tools",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{\n  \"tool\": \"SLACK_SEND_MESSAGE\",\n  \"parameters\": {}\n}"
+            }
+          },
+          "docs": "Runs a tool by name with parameters on behalf of the Connected User."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Proxy a request to a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://proxy.useparagon.com/projects/:projectId/sdk/proxy/:integrationType/:apiPath",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "integrationType",
+                "value": "slack",
+                "type": "path"
+              },
+              {
+                "name": "apiPath",
+                "value": "chat.postMessage",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Forwards a request to the third-party provider on behalf of the Connected User. Any HTTP verb is accepted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
