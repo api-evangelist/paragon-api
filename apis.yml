@@ -132,6 +132,8 @@ apis:
     for custom integrations); any HTTP verb is accepted and the token carries the
     Connected User identity.
 common:
+- type: AgenticAccess
+  url: agentic-access/paragon-api-agentic-access.yml
 - type: DomainSecurity
   url: security/paragon-api-domain-security.yml
 - type: Authentication
