@@ -1,0 +1,254 @@
+openapi: 3.0.3
+info:
+  title: Paragon ActionKit Connect API
+  description: 'Paragon is an embedded iPaaS for SaaS companies. This specification covers Paragon''s documented REST surfaces: the Connect/SDK API and Workflows API on api.useparagon.com, the ActionKit tool-calling API on actionkit.useparagon.com, and the Proxy (passthrough) API on proxy.useparagon.com. Every request is made on behalf of a Connected User and authenticated with a Paragon User Token - an RS256-signed JWT - passed as a Bearer token. Paths, methods, and hosts are confirmed from Paragon''s public documentation; request and response bodies are modeled as generic JSON objects because Paragon does not publish a formal per-endpoint schema for the SDK API. Base hosts differ per API family; select the appropriate server.'
+  version: '1.0'
+  contact:
+    name: Paragon
+    url: https://www.useparagon.com
+servers:
+- url: https://api.useparagon.com
+  description: Connect/SDK API and Workflows API
+- url: https://actionkit.useparagon.com
+  description: ActionKit tool-calling API
+- url: https://proxy.useparagon.com
+  description: Proxy (passthrough) API
+security:
+- paragonUserToken: []
+tags:
+- name: Connect
+  description: Project and integration metadata, Connected User, and credentials.
+paths:
+  /projects/{projectId}/sdk/metadata:
+    get:
+      operationId: getIntegrationMetadata
+      tags:
+      - Connect
+      summary: Get integration metadata
+      description: Returns metadata (name, brand color, icon) for the project's integrations.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: Integration metadata.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}/sdk/integrations:
+    get:
+      operationId: listIntegrations
+      tags:
+      - Connect
+      summary: List enabled integrations
+      description: Lists the project's enabled integrations and their configuration.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: A list of enabled integrations.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}/sdk/integrations/{integrationType}:
+    get:
+      operationId: getIntegration
+      tags:
+      - Connect
+      summary: Get an integration configuration
+      description: Returns the configuration for a specific integration type (e.g. salesforce).
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - name: integrationType
+        in: path
+        required: true
+        description: Integration type identifier (e.g. salesforce, hubspot, slack).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Integration configuration.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}/sdk/integrations/{integrationId}:
+    delete:
+      operationId: disconnectIntegration
+      tags:
+      - Connect
+      summary: Disconnect an integration
+      description: Disconnects an integration for the authenticated Connected User.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - name: integrationId
+        in: path
+        required: true
+        description: The integration instance ID to disconnect.
+        schema:
+          type: string
+      responses:
+        '200':
+          description: The integration was disconnected.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}/sdk/me:
+    get:
+      operationId: getConnectedUser
+      tags:
+      - Connect
+      summary: Get the authenticated Connected User
+      description: Returns the authenticated Connected User and their integration state.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: The Connected User and integration state.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    patch:
+      operationId: updateConnectedUser
+      tags:
+      - Connect
+      summary: Update Connected User metadata
+      description: Updates metadata on the authenticated Connected User.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The updated Connected User.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}/sdk/actions:
+    post:
+      operationId: loadActionOptions
+      tags:
+      - Connect
+      summary: Load dynamic action options
+      description: Loads options from a dynamic data source for an integration field.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The loaded options.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}/sdk/credentials:
+    get:
+      operationId: listCredentials
+      tags:
+      - Connect
+      summary: List connected credentials
+      description: Returns the Connected User's connected credentials.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      responses:
+        '200':
+          description: A list of connected credentials.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}/sdk/credentials/{credentialId}:
+    patch:
+      operationId: updateCredential
+      tags:
+      - Connect
+      summary: Update a connected credential
+      description: Updates the configuration of a connected credential.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - name: credentialId
+        in: path
+        required: true
+        description: The credential ID to update.
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The updated credential.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The Paragon Project ID (UUID).
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid Paragon User Token.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+  securitySchemes:
+    paragonUserToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Paragon User Token - an RS256-signed JWT identifying a Connected User - passed as Authorization: Bearer <token>. Signed by the builder''s server with the private Signing Key from Settings > SDK Setup and verified by Paragon with the matching public key.'

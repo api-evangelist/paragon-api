@@ -1,0 +1,130 @@
+openapi: 3.0.3
+info:
+  title: Paragon ActionKit Workflows API
+  description: 'Paragon is an embedded iPaaS for SaaS companies. This specification covers Paragon''s documented REST surfaces: the Connect/SDK API and Workflows API on api.useparagon.com, the ActionKit tool-calling API on actionkit.useparagon.com, and the Proxy (passthrough) API on proxy.useparagon.com. Every request is made on behalf of a Connected User and authenticated with a Paragon User Token - an RS256-signed JWT - passed as a Bearer token. Paths, methods, and hosts are confirmed from Paragon''s public documentation; request and response bodies are modeled as generic JSON objects because Paragon does not publish a formal per-endpoint schema for the SDK API. Base hosts differ per API family; select the appropriate server.'
+  version: '1.0'
+  contact:
+    name: Paragon
+    url: https://www.useparagon.com
+servers:
+- url: https://api.useparagon.com
+  description: Connect/SDK API and Workflows API
+- url: https://actionkit.useparagon.com
+  description: ActionKit tool-calling API
+- url: https://proxy.useparagon.com
+  description: Proxy (passthrough) API
+security:
+- paragonUserToken: []
+tags:
+- name: Workflows
+  description: Enable, disable, and trigger Workflows and send App Events.
+paths:
+  /projects/{projectId}/sdk/workflows/{workflowId}:
+    post:
+      operationId: enableWorkflow
+      tags:
+      - Workflows
+      summary: Enable a Workflow
+      description: Enables a Workflow for the authenticated Connected User.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - $ref: '#/components/parameters/WorkflowId'
+      responses:
+        '200':
+          description: The Workflow was enabled.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    delete:
+      operationId: disableWorkflow
+      tags:
+      - Workflows
+      summary: Disable a Workflow
+      description: Disables a Workflow for the authenticated Connected User.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - $ref: '#/components/parameters/WorkflowId'
+      responses:
+        '200':
+          description: The Workflow was disabled.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}/sdk/triggers/{workflowId}:
+    post:
+      operationId: triggerWorkflow
+      tags:
+      - Workflows
+      summary: Trigger a request-type Workflow
+      description: Triggers a request-type Workflow and returns its response.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - $ref: '#/components/parameters/WorkflowId'
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The Workflow response.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /projects/{projectId}/sdk/events/trigger:
+    post:
+      operationId: triggerEvent
+      tags:
+      - Workflows
+      summary: Send an App Event
+      description: Sends an App Event that can trigger event-based Workflows.
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '200':
+          description: The event was accepted.
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    WorkflowId:
+      name: workflowId
+      in: path
+      required: true
+      description: The Workflow ID.
+      schema:
+        type: string
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The Paragon Project ID (UUID).
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid Paragon User Token.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+  securitySchemes:
+    paragonUserToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Paragon User Token - an RS256-signed JWT identifying a Connected User - passed as Authorization: Bearer <token>. Signed by the builder''s server with the private Signing Key from Settings > SDK Setup and verified by Paragon with the matching public key.'

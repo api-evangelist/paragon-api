@@ -1,0 +1,146 @@
+openapi: 3.0.3
+info:
+  title: Paragon ActionKit API
+  description: 'Paragon is an embedded iPaaS for SaaS companies. This specification covers Paragon''s documented REST surfaces: the Connect/SDK API and Workflows API on api.useparagon.com, the ActionKit tool-calling API on actionkit.useparagon.com, and the Proxy (passthrough) API on proxy.useparagon.com. Every request is made on behalf of a Connected User and authenticated with a Paragon User Token - an RS256-signed JWT - passed as a Bearer token. Paths, methods, and hosts are confirmed from Paragon''s public documentation; request and response bodies are modeled as generic JSON objects because Paragon does not publish a formal per-endpoint schema for the SDK API. Base hosts differ per API family; select the appropriate server.'
+  version: '1.0'
+  contact:
+    name: Paragon
+    url: https://www.useparagon.com
+servers:
+- url: https://api.useparagon.com
+  description: Connect/SDK API and Workflows API
+- url: https://actionkit.useparagon.com
+  description: ActionKit tool-calling API
+- url: https://proxy.useparagon.com
+  description: Proxy (passthrough) API
+security:
+- paragonUserToken: []
+tags:
+- name: ActionKit
+  description: List and run third-party tools (actions) for AI agents.
+paths:
+  /projects/{projectId}/tools:
+    get:
+      operationId: listTools
+      tags:
+      - ActionKit
+      summary: List tools (actions)
+      description: Lists the third-party tools available to the Connected User as JSON Schema. Served on the ActionKit host (actionkit.useparagon.com). A backward-compatible alias exists at /projects/{projectId}/actions.
+      servers:
+      - url: https://actionkit.useparagon.com
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      - name: format
+        in: query
+        description: Response format for tool definitions. Defaults to json_schema.
+        schema:
+          type: string
+          default: json_schema
+      - name: limit_to_available
+        in: query
+        description: If true, returns only tools available to the user. Defaults to true.
+        schema:
+          type: boolean
+          default: true
+      - name: reload_fields
+        in: query
+        description: Force a refresh of dynamically loaded custom fields.
+        schema:
+          type: boolean
+          default: false
+      - name: integrations
+        in: query
+        description: Comma-separated integration names to filter by (e.g. salesforce,hubspot).
+        schema:
+          type: string
+      - name: categories
+        in: query
+        description: Comma-separated integration categories to filter by (e.g. crm,project_management).
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Available tools and any per-integration errors.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  tools:
+                    type: object
+                    additionalProperties: true
+                    description: Map of integration name to an array of tool definitions.
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        integration:
+                          type: string
+                        type:
+                          type: string
+                        message:
+                          type: string
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: runTool
+      tags:
+      - ActionKit
+      summary: Run a tool (action)
+      description: Runs a tool by name with parameters on behalf of the Connected User and returns the underlying provider's response. Served on the ActionKit host (actionkit.useparagon.com). A backward-compatible alias exists at /projects/{projectId}/actions.
+      servers:
+      - url: https://actionkit.useparagon.com
+      parameters:
+      - $ref: '#/components/parameters/ProjectId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - tool
+              properties:
+                tool:
+                  type: string
+                  description: The tool name (e.g. SLACK_SEND_MESSAGE).
+                parameters:
+                  type: object
+                  additionalProperties: true
+                  description: Tool-specific parameters.
+      responses:
+        '200':
+          description: The response from the underlying integration provider.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  parameters:
+    ProjectId:
+      name: projectId
+      in: path
+      required: true
+      description: The Paragon Project ID (UUID).
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid Paragon User Token.
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+  securitySchemes:
+    paragonUserToken:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'Paragon User Token - an RS256-signed JWT identifying a Connected User - passed as Authorization: Bearer <token>. Signed by the builder''s server with the private Signing Key from Settings > SDK Setup and verified by Paragon with the matching public key.'
