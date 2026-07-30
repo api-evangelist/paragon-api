@@ -11,7 +11,20 @@ description: Paragon is an embedded iPaaS that lets SaaS companies build native,
   (api.useparagon.com), a Workflows API, an ActionKit tool-calling API for AI agents
   (actionkit.useparagon.com), and a Proxy API (proxy.useparagon.com) that forwards
   requests to third-party providers. Paragon is a B2B, contact-sales product.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: true
+  try_now: true
+  public: false
+  label: Freemium (free trial) · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paragon-api.png
 tags:
 - Embedded iPaaS
 - Integrations
@@ -26,111 +39,110 @@ created: '2026-07-12'
 modified: '2026-07-12'
 specificationVersion: '0.19'
 apis:
-- aid: paragon-api:paragon-connect-api
-  name: Paragon Connect API
-  tags:
-  - Connect
-  - Integrations
-  - Connected Users
-  - Managed Sync
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.useparagon.com/apis/api-reference
-  baseURL: https://api.useparagon.com
-  properties:
-  - url: https://docs.useparagon.com/apis/api-reference
-    type: Documentation
-  - url: https://docs.useparagon.com/apis/api-reference
-    type: APIReference
-  - url: openapi/paragon-api-openapi.yml
-    type: OpenAPI
-  - url: collections/paragon-api.postman_collection.json
-    type: PostmanCollection
-  - url: collections/paragon-api.opencollection.json
-    type: OpenCollection
-  description: REST SDK API for the embedded integration experience. Retrieve project
-    and integration metadata, read the authenticated Connected User and their
-    connected credentials, load dynamic action options, and disconnect integrations -
-    all scoped under /projects/{projectId}/sdk and authenticated with a Paragon User
-    Token. Backs the Connect Portal and Managed Sync onboarding for each Connected
-    User.
-- aid: paragon-api:paragon-workflows-api
-  name: Paragon Workflows API
-  tags:
-  - Workflows
-  - Triggers
-  - Events
-  - Automation
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.useparagon.com/apis/api-reference
-  baseURL: https://api.useparagon.com
-  properties:
-  - url: https://docs.useparagon.com/apis/api-reference
-    type: Documentation
-  - url: https://docs.useparagon.com/apis/api-reference
-    type: APIReference
-  - url: openapi/paragon-api-openapi.yml
-    type: OpenAPI
-  - url: collections/paragon-api.postman_collection.json
-    type: PostmanCollection
-  - url: collections/paragon-api.opencollection.json
-    type: OpenCollection
-  description: Programmatically enable or disable Paragon Workflows for a Connected
-    User, trigger request-type Workflows, and send App Events that fire Workflows.
-    Endpoints live under /projects/{projectId}/sdk/workflows, /sdk/triggers, and
-    /sdk/events/trigger and are authenticated with a Paragon User Token.
-- aid: paragon-api:paragon-actionkit-api
+- aid: paragon-api:paragon-api-actionkit-api
   name: Paragon ActionKit API
+  description: List and run third-party tools (actions) for AI agents.
+  humanURL: https://docs.useparagon.com/apis/api-reference
+  baseURL: https://api.useparagon.com
   tags:
   - ActionKit
-  - Tool Calling
-  - AI Agents
-  - Actions
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.useparagon.com/actionkit/api-reference
-  baseURL: https://actionkit.useparagon.com
   properties:
-  - url: https://docs.useparagon.com/actionkit/actionkit-for-tool-calling
-    type: Documentation
-  - url: https://docs.useparagon.com/actionkit/api-reference
-    type: APIReference
-  - url: openapi/paragon-api-openapi.yml
-    type: OpenAPI
-  - url: collections/paragon-api.postman_collection.json
-    type: PostmanCollection
-  - url: collections/paragon-api.opencollection.json
-    type: OpenCollection
-  description: Tool-calling API for AI agents. List the third-party actions (tools)
-    available to a Connected User as JSON Schema, then run a tool by name with
-    parameters. Endpoints are GET and POST /projects/{projectId}/tools (with a
-    backward-compatible /actions alias) on actionkit.useparagon.com, authenticated
-    with a Paragon User Token.
-- aid: paragon-api:paragon-proxy-api
+  - type: OpenAPI
+    url: openapi/paragon-api-actionkit-api-openapi.yml
+  - type: Documentation
+    url: https://docs.useparagon.com/apis/api-reference
+  - type: APIReference
+    url: https://docs.useparagon.com/apis/api-reference
+  - type: PostmanCollection
+    url: collections/paragon-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/paragon-api.opencollection.json
+  - type: Documentation
+    url: https://docs.useparagon.com/actionkit/actionkit-for-tool-calling
+  - type: APIReference
+    url: https://docs.useparagon.com/actionkit/api-reference
+  - type: Documentation
+    url: https://docs.useparagon.com/api/making-api-requests
+  - type: APIReference
+    url: https://docs.useparagon.com/api/making-api-requests
+- aid: paragon-api:paragon-api-connect-api
+  name: Paragon Connect API
+  description: Project and integration metadata, Connected User, and credentials.
+  humanURL: https://docs.useparagon.com/apis/api-reference
+  baseURL: https://api.useparagon.com
+  tags:
+  - Connect
+  properties:
+  - type: OpenAPI
+    url: openapi/paragon-api-connect-api-openapi.yml
+  - type: Documentation
+    url: https://docs.useparagon.com/apis/api-reference
+  - type: APIReference
+    url: https://docs.useparagon.com/apis/api-reference
+  - type: PostmanCollection
+    url: collections/paragon-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/paragon-api.opencollection.json
+  - type: Documentation
+    url: https://docs.useparagon.com/actionkit/actionkit-for-tool-calling
+  - type: APIReference
+    url: https://docs.useparagon.com/actionkit/api-reference
+  - type: Documentation
+    url: https://docs.useparagon.com/api/making-api-requests
+  - type: APIReference
+    url: https://docs.useparagon.com/api/making-api-requests
+- aid: paragon-api:paragon-api-proxy-api
   name: Paragon Proxy API
+  description: Forward requests to third-party providers on behalf of a Connected User.
+  humanURL: https://docs.useparagon.com/apis/api-reference
+  baseURL: https://api.useparagon.com
   tags:
   - Proxy
-  - Passthrough
-  - Third Party APIs
-  - Connected Users
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://docs.useparagon.com/api/making-api-requests
-  baseURL: https://proxy.useparagon.com
   properties:
-  - url: https://docs.useparagon.com/api/making-api-requests
-    type: Documentation
-  - url: https://docs.useparagon.com/api/making-api-requests
-    type: APIReference
-  - url: openapi/paragon-api-openapi.yml
-    type: OpenAPI
-  - url: collections/paragon-api.postman_collection.json
-    type: PostmanCollection
-  - url: collections/paragon-api.opencollection.json
-    type: OpenCollection
-  description: Passthrough (formerly Connect) API that forwards any HTTP request to a
-    third-party integration provider on behalf of a Connected User, reusing the
-    credentials they authorized in the Connect Portal. Paths are
-    /projects/{projectId}/sdk/proxy/{integrationType}/{apiPath} (or /custom/{integrationId}/...
-    for custom integrations); any HTTP verb is accepted and the token carries the
-    Connected User identity.
+  - type: OpenAPI
+    url: openapi/paragon-api-proxy-api-openapi.yml
+  - type: Documentation
+    url: https://docs.useparagon.com/apis/api-reference
+  - type: APIReference
+    url: https://docs.useparagon.com/apis/api-reference
+  - type: PostmanCollection
+    url: collections/paragon-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/paragon-api.opencollection.json
+  - type: Documentation
+    url: https://docs.useparagon.com/actionkit/actionkit-for-tool-calling
+  - type: APIReference
+    url: https://docs.useparagon.com/actionkit/api-reference
+  - type: Documentation
+    url: https://docs.useparagon.com/api/making-api-requests
+  - type: APIReference
+    url: https://docs.useparagon.com/api/making-api-requests
+- aid: paragon-api:paragon-api-workflows-api
+  name: Paragon Workflows API
+  description: Enable, disable, and trigger Workflows and send App Events.
+  humanURL: https://docs.useparagon.com/apis/api-reference
+  baseURL: https://api.useparagon.com
+  tags:
+  - Workflows
+  properties:
+  - type: OpenAPI
+    url: openapi/paragon-api-workflows-api-openapi.yml
+  - type: Documentation
+    url: https://docs.useparagon.com/apis/api-reference
+  - type: APIReference
+    url: https://docs.useparagon.com/apis/api-reference
+  - type: PostmanCollection
+    url: collections/paragon-api.postman_collection.json
+  - type: OpenCollection
+    url: collections/paragon-api.opencollection.json
+  - type: Documentation
+    url: https://docs.useparagon.com/actionkit/actionkit-for-tool-calling
+  - type: APIReference
+    url: https://docs.useparagon.com/actionkit/api-reference
+  - type: Documentation
+    url: https://docs.useparagon.com/api/making-api-requests
+  - type: APIReference
+    url: https://docs.useparagon.com/api/making-api-requests
 common:
 - type: AgenticAccess
   url: agentic-access/paragon-api-agentic-access.yml
