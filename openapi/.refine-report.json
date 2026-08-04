@@ -1,0 +1,20 @@
+{
+  "provider": "paragon-api",
+  "sources": [
+    "paragon-api-actionkit-api-openapi.yml",
+    "paragon-api-connect-api-openapi.yml",
+    "paragon-api-proxy-api-openapi.yml",
+    "paragon-api-workflows-api-openapi.yml"
+  ],
+  "outputs": [
+    "paragon-api-actionkit-api-openapi.yml",
+    "paragon-api-connect-api-openapi.yml",
+    "paragon-api-proxy-api-openapi.yml",
+    "paragon-api-workflows-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
