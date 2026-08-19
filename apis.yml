@@ -37,7 +37,7 @@ tags:
 - Connectors
 created: '2026-07-12'
 modified: '2026-07-12'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: paragon-api:paragon-api-actionkit-api
   name: Paragon ActionKit API
