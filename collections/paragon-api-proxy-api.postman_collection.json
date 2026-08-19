@@ -1,0 +1,492 @@
+{
+  "item": [
+    {
+      "id": "47be14fa-3aaf-4f37-9c21-ac9e4ecd9614",
+      "name": "Proxy",
+      "description": {
+        "content": "Forward requests to third-party providers on behalf of a Connected User.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "98c9233b-639b-4399-8fa2-e932232ce099",
+          "name": "Proxy a GET request to a provider",
+          "request": {
+            "name": "Proxy a GET request to a provider",
+            "description": {
+              "content": "Forwards a GET request to the third-party provider on behalf of the Connected User. Served on the Proxy host (proxy.useparagon.com). Any HTTP verb is accepted; GET and POST are modeled here as representative. Use /projects/{projectId}/sdk/proxy/custom/{integrationId}/{apiPath} for custom integrations.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "projects",
+                ":projectId",
+                "sdk",
+                "proxy",
+                ":integrationType",
+                ":apiPath"
+              ],
+              "host": [
+                "proxy",
+                "useparagon",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) The Paragon Project ID (UUID)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "integrationType",
+                  "description": "(Required) Integration type identifier (e.g. slack, salesforce)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiPath",
+                  "description": "(Required) The third-party provider API path to call (may contain slashes)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c9619bc6-7666-4b77-ae18-dabc19319238",
+              "name": "The provider's response, passed through.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "sdk",
+                    "proxy",
+                    ":integrationType",
+                    ":apiPath"
+                  ],
+                  "host": [
+                    "proxy",
+                    "useparagon",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The Paragon Project ID (UUID)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "integrationType",
+                      "description": "(Required) Integration type identifier (e.g. slack, salesforce)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiPath",
+                      "description": "(Required) The third-party provider API path to call (may contain slashes)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": \"string\",\n  \"key_1\": \"string\",\n  \"key_2\": \"string\",\n  \"key_3\": 4335.933349048724\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "804645a0-1f2e-4fe5-bbc1-b384bd141b7f",
+              "name": "Missing or invalid Paragon User Token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "sdk",
+                    "proxy",
+                    ":integrationType",
+                    ":apiPath"
+                  ],
+                  "host": [
+                    "proxy",
+                    "useparagon",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The Paragon Project ID (UUID)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "integrationType",
+                      "description": "(Required) Integration type identifier (e.g. slack, salesforce)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiPath",
+                      "description": "(Required) The third-party provider API path to call (may contain slashes)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8c9ebc21-21d1-46cb-bc5c-fd5050be1311",
+          "name": "Proxy a POST request to a provider",
+          "request": {
+            "name": "Proxy a POST request to a provider",
+            "description": {
+              "content": "Forwards a POST request (JSON body) to the third-party provider on behalf of the Connected User. Served on the Proxy host (proxy.useparagon.com).",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "projects",
+                ":projectId",
+                "sdk",
+                "proxy",
+                ":integrationType",
+                ":apiPath"
+              ],
+              "host": [
+                "proxy",
+                "useparagon",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) The Paragon Project ID (UUID)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "integrationType",
+                  "description": "(Required) Integration type identifier (e.g. slack, salesforce)."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "apiPath",
+                  "description": "(Required) The third-party provider API path to call (may contain slashes)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"key_0\": \"string\",\n  \"key_1\": 7665,\n  \"key_2\": 3555,\n  \"key_3\": \"string\",\n  \"key_4\": 1807\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d4890610-4ec5-444d-bd6f-6ac98d3cc04f",
+              "name": "The provider's response, passed through.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "sdk",
+                    "proxy",
+                    ":integrationType",
+                    ":apiPath"
+                  ],
+                  "host": [
+                    "proxy",
+                    "useparagon",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The Paragon Project ID (UUID)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "integrationType",
+                      "description": "(Required) Integration type identifier (e.g. slack, salesforce)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiPath",
+                      "description": "(Required) The third-party provider API path to call (may contain slashes)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": \"string\",\n  \"key_1\": \"string\",\n  \"key_2\": \"string\",\n  \"key_3\": 4335.933349048724\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": \"string\",\n  \"key_1\": \"string\",\n  \"key_2\": \"string\",\n  \"key_3\": 4335.933349048724\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f87df684-0dfc-4bad-84a3-c238ba08b94a",
+              "name": "Missing or invalid Paragon User Token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "sdk",
+                    "proxy",
+                    ":integrationType",
+                    ":apiPath"
+                  ],
+                  "host": [
+                    "proxy",
+                    "useparagon",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The Paragon Project ID (UUID)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "integrationType",
+                      "description": "(Required) Integration type identifier (e.g. slack, salesforce)."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "apiPath",
+                      "description": "(Required) The third-party provider API path to call (may contain slashes)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"key_0\": \"string\",\n  \"key_1\": \"string\",\n  \"key_2\": \"string\",\n  \"key_3\": 4335.933349048724\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.useparagon.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "fd4259d6-7b8e-436e-81ab-fc059dc27037",
+    "name": "Paragon ActionKit Proxy API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Paragon is an embedded iPaaS for SaaS companies. This specification covers Paragon's documented REST surfaces: the Connect/SDK API and Workflows API on api.useparagon.com, the ActionKit tool-calling API on actionkit.useparagon.com, and the Proxy (passthrough) API on proxy.useparagon.com. Every request is made on behalf of a Connected User and authenticated with a Paragon User Token - an RS256-signed JWT - passed as a Bearer token. Paths, methods, and hosts are confirmed from Paragon's public documentation; request and response bodies are modeled as generic JSON objects because Paragon does not publish a formal per-endpoint schema for the SDK API. Base hosts differ per API family; select the appropriate server.\n\nContact Support:\n Name: Paragon",
+      "type": "text/plain"
+    }
+  }
+}

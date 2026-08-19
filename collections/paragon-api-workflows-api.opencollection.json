@@ -1,0 +1,126 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paragon ActionKit Workflows API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Workflows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Enable a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/workflows/:workflowId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              },
+              {
+                "name": "workflowId",
+                "value": "",
+                "type": "path",
+                "description": "The Workflow ID."
+              }
+            ]
+          },
+          "docs": "Enables a Workflow for the authenticated Connected User."
+        },
+        {
+          "info": {
+            "name": "Disable a Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/workflows/:workflowId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              },
+              {
+                "name": "workflowId",
+                "value": "",
+                "type": "path",
+                "description": "The Workflow ID."
+              }
+            ]
+          },
+          "docs": "Disables a Workflow for the authenticated Connected User."
+        },
+        {
+          "info": {
+            "name": "Trigger a request-type Workflow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/triggers/:workflowId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              },
+              {
+                "name": "workflowId",
+                "value": "",
+                "type": "path",
+                "description": "The Workflow ID."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Triggers a request-type Workflow and returns its response."
+        },
+        {
+          "info": {
+            "name": "Send an App Event",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/events/trigger",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Sends an App Event that can trigger event-based Workflows."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

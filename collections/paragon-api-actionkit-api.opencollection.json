@@ -1,0 +1,96 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paragon ActionKit API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "ActionKit",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List tools (actions)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/tools",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              },
+              {
+                "name": "format",
+                "value": "",
+                "type": "query",
+                "description": "Response format for tool definitions. Defaults to json_schema."
+              },
+              {
+                "name": "limit_to_available",
+                "value": "",
+                "type": "query",
+                "description": "If true, returns only tools available to the user. Defaults to true."
+              },
+              {
+                "name": "reload_fields",
+                "value": "",
+                "type": "query",
+                "description": "Force a refresh of dynamically loaded custom fields."
+              },
+              {
+                "name": "integrations",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated integration names to filter by (e.g. salesforce,hubspot)."
+              },
+              {
+                "name": "categories",
+                "value": "",
+                "type": "query",
+                "description": "Comma-separated integration categories to filter by (e.g. crm,project_management)."
+              }
+            ]
+          },
+          "docs": "Lists the third-party tools available to the Connected User as JSON Schema. Served on the ActionKit host (actionkit.useparagon.com). A backward-compatible alias exists at /projects/{projectId}/actions."
+        },
+        {
+          "info": {
+            "name": "Run a tool (action)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/tools",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Runs a tool by name with parameters on behalf of the Connected User and returns the underlying provider's response. Served on the ActionKit host (actionkit.useparagon.com). A backward-compatible alias exists at /projects/{projectId}/actions."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,90 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paragon ActionKit Proxy API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Proxy",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Proxy a GET request to a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/proxy/:integrationType/:apiPath",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              },
+              {
+                "name": "integrationType",
+                "value": "",
+                "type": "path",
+                "description": "Integration type identifier (e.g. slack, salesforce)."
+              },
+              {
+                "name": "apiPath",
+                "value": "",
+                "type": "path",
+                "description": "The third-party provider API path to call (may contain slashes)."
+              }
+            ]
+          },
+          "docs": "Forwards a GET request to the third-party provider on behalf of the Connected User. Served on the Proxy host (proxy.useparagon.com). Any HTTP verb is accepted; GET and POST are modeled here as representative. Use /projects/{projectId}/sdk/proxy/custom/{integrationId}/{apiPath} for custom integrations."
+        },
+        {
+          "info": {
+            "name": "Proxy a POST request to a provider",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/proxy/:integrationType/:apiPath",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              },
+              {
+                "name": "integrationType",
+                "value": "",
+                "type": "path",
+                "description": "Integration type identifier (e.g. slack, salesforce)."
+              },
+              {
+                "name": "apiPath",
+                "value": "",
+                "type": "path",
+                "description": "The third-party provider API path to call (may contain slashes)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Forwards a POST request (JSON body) to the third-party provider on behalf of the Connected User. Served on the Proxy host (proxy.useparagon.com)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

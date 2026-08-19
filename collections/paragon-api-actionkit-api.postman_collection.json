@@ -1,0 +1,463 @@
+{
+  "item": [
+    {
+      "id": "d3e62194-2a50-4292-a1c4-18d1f0e9b81c",
+      "name": "ActionKit",
+      "description": {
+        "content": "List and run third-party tools (actions) for AI agents.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "88726c41-b1b5-44ce-a9c9-4b4b3777b3ea",
+          "name": "List tools (actions)",
+          "request": {
+            "name": "List tools (actions)",
+            "description": {
+              "content": "Lists the third-party tools available to the Connected User as JSON Schema. Served on the ActionKit host (actionkit.useparagon.com). A backward-compatible alias exists at /projects/{projectId}/actions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "projects",
+                ":projectId",
+                "tools"
+              ],
+              "host": [
+                "actionkit",
+                "useparagon",
+                "com"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "json_schema",
+                  "description": "Response format for tool definitions. Defaults to json_schema."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit_to_available",
+                  "value": "true",
+                  "description": "If true, returns only tools available to the user. Defaults to true."
+                },
+                {
+                  "disabled": false,
+                  "key": "reload_fields",
+                  "value": "false",
+                  "description": "Force a refresh of dynamically loaded custom fields."
+                },
+                {
+                  "disabled": false,
+                  "key": "integrations",
+                  "value": "<string>",
+                  "description": "Comma-separated integration names to filter by (e.g. salesforce,hubspot)."
+                },
+                {
+                  "disabled": false,
+                  "key": "categories",
+                  "value": "<string>",
+                  "description": "Comma-separated integration categories to filter by (e.g. crm,project_management)."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) The Paragon Project ID (UUID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "106397aa-98a7-4dfd-867c-eab99e154e89",
+              "name": "Available tools and any per-integration errors.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "tools"
+                  ],
+                  "host": [
+                    "actionkit",
+                    "useparagon",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json_schema"
+                    },
+                    {
+                      "key": "limit_to_available",
+                      "value": "true"
+                    },
+                    {
+                      "key": "reload_fields",
+                      "value": "false"
+                    },
+                    {
+                      "key": "integrations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The Paragon Project ID (UUID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"tools\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": \"string\",\n    \"key_3\": \"string\"\n  },\n  \"errors\": [\n    {\n      \"integration\": \"string\",\n      \"type\": \"string\",\n      \"message\": \"string\"\n    },\n    {\n      \"integration\": \"string\",\n      \"type\": \"string\",\n      \"message\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8a7fc342-7da8-47bc-868a-79c8c6444cc9",
+              "name": "Missing or invalid Paragon User Token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "tools"
+                  ],
+                  "host": [
+                    "actionkit",
+                    "useparagon",
+                    "com"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "json_schema"
+                    },
+                    {
+                      "key": "limit_to_available",
+                      "value": "true"
+                    },
+                    {
+                      "key": "reload_fields",
+                      "value": "false"
+                    },
+                    {
+                      "key": "integrations",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "categories",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The Paragon Project ID (UUID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "91dc5e8a-0145-4284-88c9-82b2f2395249",
+          "name": "Run a tool (action)",
+          "request": {
+            "name": "Run a tool (action)",
+            "description": {
+              "content": "Runs a tool by name with parameters on behalf of the Connected User and returns the underlying provider's response. Served on the ActionKit host (actionkit.useparagon.com). A backward-compatible alias exists at /projects/{projectId}/actions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "projects",
+                ":projectId",
+                "tools"
+              ],
+              "host": [
+                "actionkit",
+                "useparagon",
+                "com"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "projectId",
+                  "description": "(Required) The Paragon Project ID (UUID)."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tool\": \"<string>\",\n  \"parameters\": {\n    \"key_0\": 5905\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "53445e64-96d5-4303-8b80-feb5fc77537c",
+              "name": "The response from the underlying integration provider.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "tools"
+                  ],
+                  "host": [
+                    "actionkit",
+                    "useparagon",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The Paragon Project ID (UUID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tool\": \"<string>\",\n  \"parameters\": {\n    \"key_0\": false,\n    \"key_1\": 29,\n    \"key_2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"key_0\": true,\n  \"key_1\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc4800e1-ba3c-440f-a796-4400a8bb566a",
+              "name": "Missing or invalid Paragon User Token.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "projects",
+                    ":projectId",
+                    "tools"
+                  ],
+                  "host": [
+                    "actionkit",
+                    "useparagon",
+                    "com"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "projectId",
+                      "description": "(Required) The Paragon Project ID (UUID)."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tool\": \"<string>\",\n  \"parameters\": {\n    \"key_0\": false,\n    \"key_1\": 29,\n    \"key_2\": \"string\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.useparagon.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2aae7699-3b7e-4908-909c-75ae6e01b8f7",
+    "name": "Paragon ActionKit API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Paragon is an embedded iPaaS for SaaS companies. This specification covers Paragon's documented REST surfaces: the Connect/SDK API and Workflows API on api.useparagon.com, the ActionKit tool-calling API on actionkit.useparagon.com, and the Proxy (passthrough) API on proxy.useparagon.com. Every request is made on behalf of a Connected User and authenticated with a Paragon User Token - an RS256-signed JWT - passed as a Bearer token. Paths, methods, and hosts are confirmed from Paragon's public documentation; request and response bodies are modeled as generic JSON objects because Paragon does not publish a formal per-endpoint schema for the SDK API. Base hosts differ per API family; select the appropriate server.\n\nContact Support:\n Name: Paragon",
+      "type": "text/plain"
+    }
+  }
+}

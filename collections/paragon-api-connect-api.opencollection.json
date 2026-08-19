@@ -1,0 +1,225 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Paragon ActionKit Connect API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connect",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get integration metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/metadata",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              }
+            ]
+          },
+          "docs": "Returns metadata (name, brand color, icon) for the project's integrations."
+        },
+        {
+          "info": {
+            "name": "List enabled integrations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/integrations",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              }
+            ]
+          },
+          "docs": "Lists the project's enabled integrations and their configuration."
+        },
+        {
+          "info": {
+            "name": "Get an integration configuration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/integrations/:integrationType",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              },
+              {
+                "name": "integrationType",
+                "value": "",
+                "type": "path",
+                "description": "Integration type identifier (e.g. salesforce, hubspot, slack)."
+              }
+            ]
+          },
+          "docs": "Returns the configuration for a specific integration type (e.g. salesforce)."
+        },
+        {
+          "info": {
+            "name": "Disconnect an integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/integrations/:integrationId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              },
+              {
+                "name": "integrationId",
+                "value": "",
+                "type": "path",
+                "description": "The integration instance ID to disconnect."
+              }
+            ]
+          },
+          "docs": "Disconnects an integration for the authenticated Connected User."
+        },
+        {
+          "info": {
+            "name": "Get the authenticated Connected User",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/me",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              }
+            ]
+          },
+          "docs": "Returns the authenticated Connected User and their integration state."
+        },
+        {
+          "info": {
+            "name": "Update Connected User metadata",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/me",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates metadata on the authenticated Connected User."
+        },
+        {
+          "info": {
+            "name": "Load dynamic action options",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/actions",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Loads options from a dynamic data source for an integration field."
+        },
+        {
+          "info": {
+            "name": "List connected credentials",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/credentials",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              }
+            ]
+          },
+          "docs": "Returns the Connected User's connected credentials."
+        },
+        {
+          "info": {
+            "name": "Update a connected credential",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://api.useparagon.com/projects/:projectId/sdk/credentials/:credentialId",
+            "params": [
+              {
+                "name": "projectId",
+                "value": "",
+                "type": "path",
+                "description": "The Paragon Project ID (UUID)."
+              },
+              {
+                "name": "credentialId",
+                "value": "",
+                "type": "path",
+                "description": "The credential ID to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the configuration of a connected credential."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
