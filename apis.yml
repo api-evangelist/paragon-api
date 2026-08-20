@@ -27,6 +27,16 @@ accessModel:
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/paragon-api.png
 tags:
 - Embedded iPaaS
+- Integration
+- Embedded Integrations
+- Native Integrations
+- Workflow-Automation
+- Integration Platform
+- API Integration
+- SaaS Integrations
+- Connectors
+tags_raw:
+- Embedded iPaaS
 - Integrations
 - Embedded Integrations
 - Native Integrations
