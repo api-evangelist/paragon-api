@@ -11,6 +11,18 @@ description: Paragon is an embedded iPaaS that lets SaaS companies build native,
   (api.useparagon.com), a Workflows API, an ActionKit tool-calling API for AI agents
   (actionkit.useparagon.com), and a Proxy API (proxy.useparagon.com) that forwards
   requests to third-party providers. Paragon is a B2B, contact-sales product.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
