@@ -15,6 +15,12 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "paragon-api-actionkit-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "paragon-api-connect-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "paragon-api-proxy-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "paragon-api-workflows-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }

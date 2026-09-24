@@ -1,15 +1,15 @@
 ---
 kin_checks:
   slug: paragon-api
-  schema_version: 0.18.2
-  scored_at: '2026-09-04'
-  run_ts: 2026-09-04T062714
+  schema_version: 0.18.3
+  scored_at: '2026-09-05'
+  run_ts: 2026-09-05T195450
   note: Actionable checks only (missed + partial). earned/na are every other check
-    in rubric/scoring-0.18.2.yml; counts below let you verify that.
+    in rubric/scoring-0.18.3.yml; counts below let you verify that.
   counts:
     total: 132
-    earned: 36
-    partial: 3
+    earned: 35
+    partial: 4
     missed: 67
     na: 26
   checks:
@@ -151,6 +151,9 @@ kin_checks:
     status: missed
   - id: agentic_commerce
     status: missed
+  - id: postman_present
+    status: partial
+    earned: 0.5
   - id: agentic_access
     status: partial
     earned: 2.5
